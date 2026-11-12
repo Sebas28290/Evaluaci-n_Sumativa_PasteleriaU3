@@ -14,7 +14,7 @@ class LineaAdmin (admin.ModelAdmin):
 @admin.register (Producto)
 
 class ProductoAdmin (admin.ModelAdmin):
-    list_display = ['linea', 'nombre', 'disponible', 'formato_chileno', 'stock']
+    list_display = ['linea', 'nombre', 'disponible', 'formato_chileno', 'stock',]
     list_filter = ['disponible', 'linea',]
     search_fields = ['nombre',]
     
@@ -25,9 +25,9 @@ class ProductoAdmin (admin.ModelAdmin):
 @admin.register(Encargo)
 
 class EncargoAdmin (admin.ModelAdmin):
-    list_display = ['codigo', 'producto', 'cantidad_unidades', 'fecha_retiro']
+    list_display = ['codigo', 'producto', 'cantidad_unidades', 'fecha_retiro',]
     list_filter = ['producto', 'fecha_retiro',]
-    search_fields= ['nombre_cliente', 'correo_cliente',]
+    search_fields = ['nombre_cliente', 'correo_cliente',]
 
     
    
