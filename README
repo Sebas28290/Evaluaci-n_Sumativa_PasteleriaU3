@@ -1,0 +1,26 @@
+- Pasos para instalar el Proyecto Dia jueves 12/11/2026
+
+- Si es necesario entrar a un disco de respaldo entrar a
+t:
+
+- Luego clonar el repositorio
+git clone [enlace]
+
+- Entrar al proyecto con el nombre de la carpeta clonada anteriormente
+cd [nombre archivo clonado]
+
+- Instalar el entorno virtual
+Python -m venv .venv
+
+- Si da error activar el repositorio introducir este comando para tener
+los permisos necesarios.
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
+- Entrar al entorno o activarlo.
+.venv/Scripts/actívate
+
+- Instalar los requerimientos.
+pip install -r requirements.txt
+
+- Y correr el servidor como prueba.
+python manage.py runserver
