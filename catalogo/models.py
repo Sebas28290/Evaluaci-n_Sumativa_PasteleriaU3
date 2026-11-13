@@ -13,7 +13,7 @@ class Linea (models.Model):
 
 class Producto (models.Model):
     linea = models.ForeignKey (Linea, on_delete=models.CASCADE)
-    nombre= models.CharField ()
+    nombre= models.CharField (max_length = 80, blank= True, null = True)
     precio = models.PositiveIntegerField ()
     cantidad_porciones = models.PositiveIntegerField ()
     apto_celiaco = models.BooleanField ()
