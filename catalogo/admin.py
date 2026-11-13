@@ -28,6 +28,6 @@ class EncargoAdmin (admin.ModelAdmin):
     list_display = ['codigo', 'producto', 'cantidad_unidades', 'fecha_retiro',]
     list_filter = ['producto', 'fecha_retiro',]
     search_fields = ['nombre_cliente', 'correo_cliente',]
-
+    
     
    
