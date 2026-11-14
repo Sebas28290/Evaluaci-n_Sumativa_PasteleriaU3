@@ -37,7 +37,7 @@
                     Encargo registrado correctamente. Código: <strong>{{ encargo_creado.codigo }}</strong>
                 </div>
                 {% endif %}
-
+                {% if producto.stock > 0 %}
                 <form method="post" novalidate>
                     {% csrf_token %}
 
@@ -68,6 +68,9 @@
                         <div class="col-md-6">
                             <label class="form-label">Cantidad de unidades</label>
                             {{ form.cantidad_unidades }}
+                            {% if error_stock %}
+                            <div class="text-danger small mt-1">{{ error_stock }}</div>
+                            {% endif %}
                             {% for error in form.cantidad_unidades.errors %}
                             <div class="text-danger small mt-1">{{ error }}</div>
                             {% endfor %}
@@ -75,6 +78,15 @@
                     </div>
 
                     <button type="submit" class="btn btn-success w-100">Confirmar encargo</button>
+                </form>
+                
+                {% else %}
+                <div class="alert alert-warning">
+                    <strong>Producto agotado por hoy.</strong> No hay unidades disponibles para encargar.
+                </div>
+                {% endif %}
+
+                    
                 </form>
             </div>
         </div>
