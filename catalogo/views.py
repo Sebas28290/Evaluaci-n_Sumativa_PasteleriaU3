@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from catalogo.models import Producto, Linea
-from django.shortcuts import render, get_object_or_404
+from catalogo.models import Producto, Linea, Encargo
+from django.shortcuts import render, get_object_or_404, redirect
 from catalogo.forms import EncargoForm
 
 # Create your views here.
@@ -43,8 +43,7 @@ def detalle_producto(request, pk):
                 encargo.save()
                 producto.stock -= encargo.cantidad_unidades
                 producto.save()
-                encargo_creado = encargo
-                form = EncargoForm()
+                return redirect('comprobante_encargo', codigo=encargo.codigo)
     else:
         form = EncargoForm()
 
@@ -55,3 +54,7 @@ def detalle_producto(request, pk):
         'error_stock': error_stock,
     }
     return render(request, 'catalogo/detalle.html', contexto)
+
+def comprobante_encargo(request, codigo):
+    encargo = get_object_or_404(Encargo, codigo=codigo)
+    return render(request, 'catalogo/comprobante.html', {'encargo': encargo})

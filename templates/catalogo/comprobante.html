@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Comprobante {{ encargo.codigo }} Pastelería Artesanal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow-sm border-success">
+            <div class="card-header bg-success text-white text-center py-3">
+                <h4 class="mb-0">¡Encargo Confirmado!</h4>
+            </div>
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <span class="text-muted d-block">Código de retiro</span>
+                    <span class="badge bg-dark fs-4 px-4 py-2 mt-1">{{ encargo.codigo }}</span>
+                </div>
+
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th class="bg-light w-40">Producto</th>
+                            <td>{{ encargo.producto.nombre }} ({{ encargo.producto.linea.nombre }})</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Cantidad</th>
+                            <td>{{ encargo.cantidad_unidades }} unidad(es)</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Precio unitario</th>
+                            <td>{{ encargo.producto.formato_chileno }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Total a pagar</th>
+                            <td class="fw-bold text-primary fs-5">{{ encargo.formato_chilenototal }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Cliente</th>
+                            <td>{{ encargo.nombre_cliente }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Correo</th>
+                            <td>{{ encargo.correo_cliente }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Fecha de retiro</th>
+                            <td>{{ encargo.fecha_retiro|date:"d/m/Y" }}</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Fecha y hora de registro</th>
+                            <td>{{ encargo.fecha_hora_encargo|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-grid mt-4">
+                    <a href="{% url 'catalogo' %}" class="btn btn-primary">Volver al catálogo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

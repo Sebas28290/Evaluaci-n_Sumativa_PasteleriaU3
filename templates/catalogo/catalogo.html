@@ -37,6 +37,7 @@
                     <span class="badge bg-secondary">{{ producto.linea.nombre }}</span>
                     {% if producto.apto_celiaco %}
                     <span class="badge bg-success">Apto celíacos</span>
+                    {% endif %}
                     {% if producto.stock == 0 %}
                     <span class="badge bg-danger">Agotado por hoy</span>
 
