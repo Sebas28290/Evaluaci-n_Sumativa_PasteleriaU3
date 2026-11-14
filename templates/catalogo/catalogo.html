@@ -42,6 +42,7 @@
                 <h5 class="card-title">{{ producto.nombre }}</h5>
                 <p class="card-text text-muted small mb-2">Rinde {{ producto.cantidad_porciones }} porciones</p>
                 <h5 class="text-primary fw-bold mt-auto">{{ producto.formato_chileno }}</h5>
+                <a href="{% url 'detalle_producto' producto.pk %}" class="btn btn-outline-primary btn-sm mt-2">Ver detalle</a>
             </div>
         </div>
     </div>
