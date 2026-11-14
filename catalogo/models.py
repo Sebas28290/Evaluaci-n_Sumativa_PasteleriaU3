@@ -21,8 +21,8 @@ class Producto (models.Model):
     imagen = models.ImageField (upload_to='productos/', blank=True, null=True)
     disponible = models.BooleanField(default=True)
 
-    def preciototal (self):
-        return self.precio * self.cantidad_porciones
+    def formato_chileno(self):
+            return f'${self.precio:,}'.replace (',','.')
     
     def __str__(self):
         return f"{self.linea.nombre} - {self.nombre}"
@@ -39,6 +39,9 @@ class Encargo (models.Model):
     
     def cantidadtotal (self):
         return self.cantidad_unidades * self.producto.precio
+    
+    def formato_chilenototal(self):
+                return f'${self.cantidadtotal():,}'.replace (',','.')
     
     def __str__(self):
         return f"{self.nombre_cliente} - {self.fecha_retiro}"

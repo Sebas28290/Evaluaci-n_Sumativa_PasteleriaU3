@@ -19,8 +19,6 @@ class ProductoAdmin (admin.ModelAdmin):
     search_fields = ['nombre',]
     
 
-    def formato_chileno(self, obj):
-        return f'${obj.precio:,}'.replace (',','.')
     
 @admin.register(Encargo)
 
