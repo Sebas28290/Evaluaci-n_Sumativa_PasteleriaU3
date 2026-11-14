@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ producto.nombre }} Pastelería Artesanal{% endblock %}
+{% block title %}{{ producto.nombre }} — Pastelería Artesanal{% endblock %}
 
 {% block content %}
 <div class="mb-3">
@@ -28,6 +28,54 @@
                     <li><strong>Porciones:</strong> {{ producto.cantidad_porciones }} porciones</li>
                     <li><strong>Stock disponible:</strong> {{ producto.stock }} unidades</li>
                 </ul>
+
+                <hr>
+                <h5 class="mb-3">Realizar encargo</h5>
+
+                {% if encargo_creado %}
+                <div class="alert alert-success">
+                    Encargo registrado correctamente. Código: <strong>{{ encargo_creado.codigo }}</strong>
+                </div>
+                {% endif %}
+
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">Nombre completo</label>
+                        {{ form.nombre_cliente }}
+                        {% for error in form.nombre_cliente.errors %}
+                        <div class="text-danger small mt-1">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Correo electrónico</label>
+                        {{ form.correo_cliente }}
+                        {% for error in form.correo_cliente.errors %}
+                        <div class="text-danger small mt-1">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Fecha de retiro</label>
+                            {{ form.fecha_retiro }}
+                            {% for error in form.fecha_retiro.errors %}
+                            <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Cantidad de unidades</label>
+                            {{ form.cantidad_unidades }}
+                            {% for error in form.cantidad_unidades.errors %}
+                            <div class="text-danger small mt-1">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Confirmar encargo</button>
+                </form>
             </div>
         </div>
     </div>

@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from catalogo.models import Producto, Linea
+
 # Create your views here.
+
 from django.shortcuts import render, get_object_or_404
+from catalogo.forms import EncargoForm
 
 def inicio_catalogo(request):
     productos = Producto.objects.filter(disponible=True)
@@ -25,4 +28,23 @@ def inicio_catalogo(request):
 
 def detalle_producto(request, pk):
     producto = get_object_or_404(Producto, pk=pk, disponible=True)
-    return render(request, 'catalogo/detalle.html', {'producto': producto})
+    
+    encargo_creado = None
+
+    if request.method == 'POST':
+        form = EncargoForm(request.POST)
+        if form.is_valid():
+            encargo = form.save(commit=False)
+            encargo.producto = producto
+            encargo.save()
+            encargo_creado = encargo
+            form = EncargoForm()
+    else:
+        form = EncargoForm()
+
+    contexto = {
+        'producto': producto,
+        'form': form,
+        'encargo_creado': encargo_creado,
+    }
+    return render(request, 'catalogo/detalle.html', contexto)
