@@ -1,11 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2 class="mb-4">Nuestros Productos</h2>
+<div class="p-4 mb-4 bg-white rounded-3 shadow-sm">
+    <h2 class="h4 mb-3">Nuestros Productos</h2>
+
+    <form method="get" class="row g-2">
+        <div class="col-md-5">
+            <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Buscar por nombre (ej: Torta, Donas)...">
+        </div>
+        <div class="col-md-4">
+            <select name="linea" class="form-select">
+                <option value="">Todas las líneas</option>
+                {% for linea in lineas %}
+                <option value="{{ linea.id }}" {% if linea_id == linea.id|stringformat:"s" %}selected{% endif %}>
+                    {{ linea.nombre }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+            <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+            <a href="{% url 'catalogo' %}" class="btn btn-outline-secondary">Limpiar</a>
+        </div>
+    </form>
+</div>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for producto in productos %}
-   
     <div class="col">
         <div class="card h-100 shadow-sm">
             {% if producto.imagen %}
@@ -19,14 +40,14 @@
                     {% endif %}
                 </div>
                 <h5 class="card-title">{{ producto.nombre }}</h5>
-                <p class="card-text text-muted small mb-2">{{ producto.cantidad_porciones }} porciones</p>
+                <p class="card-text text-muted small mb-2">Rinde {{ producto.cantidad_porciones }} porciones</p>
                 <h5 class="text-primary fw-bold mt-auto">{{ producto.formato_chileno }}</h5>
             </div>
         </div>
     </div>
     {% empty %}
     <div class="col-12">
-        <div class="alert alert-info">No hay productos disponibles en este momento.</div>
+        <div class="alert alert-info">No se encontraron productos con esos filtros.</div>
     </div>
     {% endfor %}
 </div>
