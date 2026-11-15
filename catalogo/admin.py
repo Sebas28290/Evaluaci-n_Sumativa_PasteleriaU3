@@ -11,13 +11,13 @@ class LineaAdmin (admin.ModelAdmin):
     list_display = ['nombre',]
     search_fields = ['nombre',]
 
+
 @admin.register (Producto)
 
 class ProductoAdmin (admin.ModelAdmin):
     list_display = ['linea', 'nombre', 'disponible', 'formato_chileno', 'stock',]
     list_filter = ['disponible', 'linea',]
     search_fields = ['nombre',]
-    
 
     
 @admin.register(Encargo)

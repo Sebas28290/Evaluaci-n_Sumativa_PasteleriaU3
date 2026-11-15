@@ -36,7 +36,6 @@ class Encargo (models.Model):
     fecha_hora_encargo = models.DateTimeField (auto_now_add=True)
     codigo = models.CharField (max_length=8, unique=True, default=generar_codigo, editable= False)
 
-    
     def cantidadtotal (self):
         return self.cantidad_unidades * self.producto.precio
     

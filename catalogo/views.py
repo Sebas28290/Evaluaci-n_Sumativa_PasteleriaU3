@@ -5,7 +5,6 @@ from catalogo.forms import EncargoForm
 
 # Create your views here.
 
-
 def inicio_catalogo(request):
     productos = Producto.objects.filter(disponible=True)
     lineas = Linea.objects.all()
@@ -53,7 +52,9 @@ def detalle_producto(request, pk):
         'encargo_creado': encargo_creado,
         'error_stock': error_stock,
     }
+
     return render(request, 'catalogo/detalle.html', contexto)
+
 
 def comprobante_encargo(request, codigo):
     encargo = get_object_or_404(Encargo, codigo=codigo)
